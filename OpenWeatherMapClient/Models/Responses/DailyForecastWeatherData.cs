@@ -1,5 +1,7 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Extension;
 using OpenWeatherMapClient.Models.Responses;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -14,19 +16,19 @@ namespace OpenWeatherMapClient.Models
         ///  Sunrise time, Unix, UTC
         /// </summary>
         [JsonPropertyName("sunrise")]
-        public int Sunrise { get; set; }
+        public DateTime Sunrise { get; set; }
 
         /// <summary>
         /// Sunset time, Unix, UTC
         /// </summary>
         [JsonPropertyName("sunset")]
-        public int Sunset { get; set; }
+        public DateTime Sunset { get; set; }
 
         /// <summary>
         /// Daily temperatures
         /// </summary>
-        [JsonPropertyName("temp")]
-        public Temperature Temperature { get; set; }
+        [JsonPropertyName("temp")] 
+        public DailyTemperature Temp { get; set; }
 
         /// <summary>
         /// This accounts for the human perception of weather.

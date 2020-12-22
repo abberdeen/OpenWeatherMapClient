@@ -1,6 +1,8 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Extension;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models.Responses
@@ -8,33 +10,12 @@ namespace OpenWeatherMapClient.Models.Responses
     public class BaseWeatherForecastData
     {
 
-        private UnitOfMeasurement _unitOfMeasurement;
-
-        /*
-         public BaseWeatherForecastData(UnitOfMeasurement unitOfMeasurement) 
-        {
-            _unitOfMeasurement = unitOfMeasurement;
-        }*/
-
-        /// <summary>
-        /// Time of the forecasted data, Unix, UTC
-        /// </summary>
-        [JsonPropertyName("dt")]
-        public int DateTimeUnix { get; set; }
-
         /// <summary>
         /// Time of the forecasted data, UTC
         /// </summary>
-        public DateTime DateTime
-        {
-            get
-            {
-                DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-                dtDateTime = dtDateTime.AddSeconds(DateTimeUnix).ToLocalTime();
-                return dtDateTime;
-            }
-        }
-
+        [JsonPropertyName("dt")] 
+        public DateTime DateTime { get; set; }
+         
         /// <summary>
         /// Atmospheric pressure on the sea level, hPa 
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Extension;
 using OpenWeatherMapClient.Models.Responses;
 using System.Text.Json.Serialization;
 
@@ -12,14 +13,14 @@ namespace OpenWeatherMapClient.Models
         /// <summary>
         /// Temperature
         /// </summary>
-        [JsonPropertyName("temp")]
-        public double Temperature { get; set; }
+        [JsonPropertyName("temp")] 
+        public Temperature Temp { get; set; }
 
         /// <summary>
         /// Temperature. This accounts for the human perception of weather.
         /// </summary>
-        [JsonPropertyName("feels_like")]
-        public double FeelsLike { get; set; }
+        [JsonPropertyName("feels_like")] 
+        public Temperature FeelsLike { get; set; }
 
         /// <summary>
         /// UV index

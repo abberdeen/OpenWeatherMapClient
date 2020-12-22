@@ -1,5 +1,7 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Extension;
 using OpenWeatherMapClient.Models.Responses;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -11,28 +13,28 @@ namespace OpenWeatherMapClient.Models
     public class CurrentWeatherData : BaseWeatherForecastData
     { 
         /// <summary>
-        ///  Sunrise time, Unix, UTC
+        ///  Sunrise time, UTC
         /// </summary>
         [JsonPropertyName("sunrise")]
-        public int Sunrise { get; set; }
+        public DateTime Sunrise { get; set; }
 
         /// <summary>
-        ///  Sunset time, Unix, UTC
+        ///  Sunset time, UTC
         /// </summary>
         [JsonPropertyName("sunset")]
-        public int Sunset { get; set; }
+        public DateTime Sunset { get; set; }
 
         /// <summary>
         /// Temperature.  
         /// </summary>
-        [JsonPropertyName("temp")]
-        public double Temperature { get; set; } 
+        [JsonPropertyName("temp")] 
+        public Temperature Temp { get; set; } 
 
         /// <summary>
         /// Temperature. This accounts for the human perception of weather. 
         /// </summary>
-        [JsonPropertyName("feels_like")]
-        public double FeelsLike { get; set; }
+        [JsonPropertyName("feels_like")] 
+        public Temperature FeelsLike { get; set; }
 
         /// <summary>
         /// Current UV index

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using OpenWeatherMapClient.Models.Extension;
+using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models.Base
 {
@@ -7,25 +8,25 @@ namespace OpenWeatherMapClient.Models.Base
         /// <summary>
         /// Morning temperature.
         /// </summary>
-        [JsonPropertyName("morn")]
-        public double Morn { get; set; }
+        [JsonPropertyName("morn")] 
+        public Temperature Morn { get; set; }
 
         /// <summary>
         /// Day temperature.
         /// </summary>
-        [JsonPropertyName("day")]
-        public double Day { get; set; }
+        [JsonPropertyName("day")] 
+        public Temperature Day { get; set; }
 
         /// <summary>
         /// Evening temperature.
         /// </summary>
-        [JsonPropertyName("eve")]
-        public double Eve { get; set; }
+        [JsonPropertyName("eve")] 
+        public Temperature Eve { get; set; }
 
         /// <summary>
         /// Night temperature.
         /// </summary>
-        [JsonPropertyName("night")]
-        public double Night { get; set; } 
+        [JsonPropertyName("night")] 
+        public Temperature Night { get; set; } 
     }
 }
