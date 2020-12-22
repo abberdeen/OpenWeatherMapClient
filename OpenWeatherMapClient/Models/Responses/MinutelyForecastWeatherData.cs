@@ -1,12 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using OpenWeatherMapClient.Models.Responses;
+using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class MinutelyForecastWeatherData
+    public class MinutelyForecastWeatherData : BaseWeatherForecastData
     {
-        [JsonPropertyName("dt")]
-        public int Dt { get; set; }
-
+        /// <summary>
+        /// Precipitation volume, mm
+        /// </summary>
         [JsonPropertyName("precipitation")]
         public int Precipitation { get; set; }
     }

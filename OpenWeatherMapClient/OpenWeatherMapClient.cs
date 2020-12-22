@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenWeatherMapClient.Models;
+using System;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient
@@ -11,15 +12,12 @@ namespace OpenWeatherMapClient
 
         public void MakeOneCallRequest() 
         {
-
+            var x = new HourlyForecastWeatherData();
+         
         }
     }
 
-    public class Snow
-    {
-        [JsonPropertyName("1h")]
-        public double _1h { get; set; }
-    }
+
 
 
 }

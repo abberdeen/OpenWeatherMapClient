@@ -1,4 +1,5 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Responses;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -7,14 +8,8 @@ namespace OpenWeatherMapClient.Models
     /// <summary>
     ///  Current weather data API response
     /// </summary>
-    public class CurrentWeatherData
-    {
-        /// <summary>
-        /// Current time, Unix, UTC
-        /// </summary>
-        [JsonPropertyName("dt")]
-        public int Dt { get; set; }
-
+    public class CurrentWeatherData : BaseWeatherForecastData
+    { 
         /// <summary>
         ///  Sunrise time, Unix, UTC
         /// </summary>
@@ -28,10 +23,10 @@ namespace OpenWeatherMapClient.Models
         public int Sunset { get; set; }
 
         /// <summary>
-        /// Temperature. Units - default: kelvin, metric: Celsius, imperial: Fahrenheit. How to change units used
+        /// Temperature.  
         /// </summary>
         [JsonPropertyName("temp")]
-        public double Temperature { get; set; }
+        public double Temperature { get; set; } 
 
         /// <summary>
         /// Temperature. This accounts for the human perception of weather. 
@@ -40,76 +35,27 @@ namespace OpenWeatherMapClient.Models
         public double FeelsLike { get; set; }
 
         /// <summary>
-        ///
-        /// </summary>
-        [JsonPropertyName("pressure")]
-        public int Pressure { get; set; }
-
-        /// <summary>
-        /// Atmospheric pressure on the sea level, hPa
-        /// </summary>
-        [JsonPropertyName("humidity")]
-        public int Humidity { get; set; }
-
-        /// <summary>
-        /// Humidity, %
-        /// </summary>
-        [JsonPropertyName("dew_point")]
-        public double DewPoint { get; set; }
-
-        /// <summary>
-        /// Midday UV index
+        /// Current UV index
         /// </summary>
         [JsonPropertyName("uvi")]
         public int Uvi { get; set; }
-
-        /// <summary>
-        /// Cloudiness, %
-        /// </summary>
-        [JsonPropertyName("clouds")]
-        public int Clouds { get; set; }
-
+         
         /// <summary>
         /// Average visibility, metres
         /// </summary>
         [JsonPropertyName("visibility")]
         public int Visibility { get; set; }
-
+                    
         /// <summary>
-        /// Wind speed.
-        /// </summary>
-        [JsonPropertyName("wind_speed")]
-        public double WindSpeed { get; set; }
-
-        ///
-        /// (where available) Wind gust. Wind speed.
-        /// </summary>
-        [JsonPropertyName("wind_gust")]
-        public double? WindGust { get; set; }
-
-        /// <summary>
-        /// Wind direction, degrees (meteorological)
-        /// </summary>
-        [JsonPropertyName("wind_deg")]
-        public int WindDeg { get; set; }
-
-
-        /// <summary>
-        /// Precipitation volume, mm
+        /// Rain
         /// </summary>
         [JsonPropertyName("rain")]
-        public int Rain { get; set; }
+        public Rain Rain { get; set; }
 
         /// <summary>
-        /// Snow volume, mm
+        /// Snow
         /// </summary>
         [JsonPropertyName("snow")]
-        public int Snow { get; set; }
-
-        /// <summary>
-        /// Wind direction, degrees (meteorological)
-        /// </summary>
-        [JsonPropertyName("weather")]
-        public List<Weather> Weather { get; set; }
+        public Snow Snow { get; set; } 
     }
 }

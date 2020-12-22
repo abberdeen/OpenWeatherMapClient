@@ -1,53 +1,60 @@
 ﻿using OpenWeatherMapClient.Models.Base;
+using OpenWeatherMapClient.Models.Responses;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class DailyForecastWeatherData
-    {
-        [JsonPropertyName("dt")]
-        public int Dt { get; set; }
-
+    /// <summary>
+    /// Daily forecast weather data API response
+    /// </summary>
+    public class DailyForecastWeatherData : BaseWeatherForecastData
+    { 
+        /// <summary>
+        ///  Sunrise time, Unix, UTC
+        /// </summary>
         [JsonPropertyName("sunrise")]
         public int Sunrise { get; set; }
 
+        /// <summary>
+        /// Sunset time, Unix, UTC
+        /// </summary>
         [JsonPropertyName("sunset")]
         public int Sunset { get; set; }
 
+        /// <summary>
+        /// Daily temperatures
+        /// </summary>
         [JsonPropertyName("temp")]
         public Temperature Temperature { get; set; }
 
+        /// <summary>
+        /// This accounts for the human perception of weather.
+        /// </summary>
         [JsonPropertyName("feels_like")]
-        public FeelsLike FeelsLike { get; set; }
+        public FeelsLike FeelsLike { get; set; } 
 
-        [JsonPropertyName("pressure")]
-        public int Pressure { get; set; }
-
-        [JsonPropertyName("humidity")]
-        public int Humidity { get; set; }
-
-        [JsonPropertyName("dew_point")]
-        public double DewPoint { get; set; }
-
-        [JsonPropertyName("wind_speed")]
-        public double WindSpeed { get; set; }
-
-        [JsonPropertyName("wind_deg")]
-        public int WindDeg { get; set; }
-
-        [JsonPropertyName("weather")]
-        public List<Weather> Weather { get; set; }
-
-        [JsonPropertyName("clouds")]
-        public int Clouds { get; set; }
-
+        /// <summary>
+        /// Probability of precipitation
+        /// </summary>
         [JsonPropertyName("pop")]
         public double Pop { get; set; }
 
+        /// <summary>
+        /// The maximum value of UV index for the day
+        /// </summary>
         [JsonPropertyName("uvi")]
         public double Uvi { get; set; }
 
+        /// <summary>
+        /// Precipitation volume, mm
+        /// </summary>
+        [JsonPropertyName("rain ")]
+        public double? Rain { get; set; }
+
+        /// <summary>
+        /// Snow volume, mm
+        /// </summary>
         [JsonPropertyName("snow")]
         public double? Snow { get; set; }
     }

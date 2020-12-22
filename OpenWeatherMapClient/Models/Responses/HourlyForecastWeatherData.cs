@@ -1,50 +1,53 @@
 ﻿using OpenWeatherMapClient.Models.Base;
-using System.Collections.Generic;
+using OpenWeatherMapClient.Models.Responses;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class HourlyForecastWeatherData
+    /// <summary>
+    /// Hourly forecast weather data API response
+    /// </summary>
+    public class HourlyForecastWeatherData : BaseWeatherForecastData
     {
-        [JsonPropertyName("dt")]
-        public int Dt { get; set; }
-
+        /// <summary>
+        /// Temperature
+        /// </summary>
         [JsonPropertyName("temp")]
-        public double Temp { get; set; }
+        public double Temperature { get; set; }
 
+        /// <summary>
+        /// Temperature. This accounts for the human perception of weather.
+        /// </summary>
         [JsonPropertyName("feels_like")]
         public double FeelsLike { get; set; }
 
-        [JsonPropertyName("pressure")]
-        public int Pressure { get; set; }
-
-        [JsonPropertyName("humidity")]
-        public int Humidity { get; set; }
-
-        [JsonPropertyName("dew_point")]
-        public double DewPoint { get; set; }
-
+        /// <summary>
+        /// UV index
+        /// </summary>
         [JsonPropertyName("uvi")]
         public double Uvi { get; set; }
 
-        [JsonPropertyName("clouds")]
-        public int Clouds { get; set; }
-
+        /// <summary>
+        /// Average visibility, metres
+        /// </summary>
         [JsonPropertyName("visibility")]
         public int Visibility { get; set; }
 
-        [JsonPropertyName("wind_speed")]
-        public double WindSpeed { get; set; }
-
-        [JsonPropertyName("wind_deg")]
-        public int WindDeg { get; set; }
-
-        [JsonPropertyName("weather")]
-        public List<Weather> Weather { get; set; }
-
+        /// <summary>
+        /// Probability of precipitation
+        /// </summary>
         [JsonPropertyName("pop")]
         public double Pop { get; set; }
 
+        /// <summary>
+        /// Rain
+        /// </summary>
+        [JsonPropertyName("rain")]
+        public Rain Rain { get; set; }
+
+        /// <summary>
+        /// Snow
+        /// </summary>
         [JsonPropertyName("snow")]
         public Snow Snow { get; set; }
     }
