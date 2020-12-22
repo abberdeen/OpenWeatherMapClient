@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models.Base
 {
-    public class Alert
+    public class AlertData
     {
         [JsonPropertyName("sender_name")]
         public string SenderName { get; set; }
@@ -22,5 +19,4 @@ namespace OpenWeatherMapClient.Models.Base
         [JsonPropertyName("description")]
         public string Description { get; set; }
     }
-
 }

@@ -1,12 +1,10 @@
 ﻿using OpenWeatherMapClient.Models.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class OneCallResponse
+    public class OneCallData
     {
         [JsonPropertyName("lat")]
         public double Lat { get; set; }
@@ -21,18 +19,18 @@ namespace OpenWeatherMapClient.Models
         public int TimezoneOffset { get; set; }
 
         [JsonPropertyName("current")]
-        public Current Current { get; set; }
+        public CurrentWeatherData Current { get; set; }
 
         [JsonPropertyName("minutely")]
-        public List<Minutely> Minutely { get; set; }
+        public List<MinutelyForecastWeatherData> Minutely { get; set; }
 
         [JsonPropertyName("hourly")]
-        public List<Hourly> Hourly { get; set; }
+        public List<HourlyForecastWeatherData> Hourly { get; set; }
 
         [JsonPropertyName("daily")]
-        public List<Daily> Daily { get; set; }
+        public List<DailyForecastWeatherData> Daily { get; set; }
 
         [JsonPropertyName("alerts")]
-        public List<Alert> Alerts { get; set; }
+        public List<AlertData> Alerts { get; set; }
     }
 }

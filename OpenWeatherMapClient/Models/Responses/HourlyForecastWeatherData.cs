@@ -1,12 +1,10 @@
 ﻿using OpenWeatherMapClient.Models.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class Hourly
+    public class HourlyForecastWeatherData
     {
         [JsonPropertyName("dt")]
         public int Dt { get; set; }
