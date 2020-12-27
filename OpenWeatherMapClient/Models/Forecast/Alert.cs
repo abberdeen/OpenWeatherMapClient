@@ -5,7 +5,7 @@ namespace OpenWeatherMapClient.Models.Base
     /// <summary>
     /// National weather alerts data from major national weather warning systems
     /// </summary>
-    public class AlertData
+    public class Alert
     {
         /// <summary>
         /// Name of the alert source. Please read here the full list of alert sources: https://openweathermap.org/api/one-call-api#listsource

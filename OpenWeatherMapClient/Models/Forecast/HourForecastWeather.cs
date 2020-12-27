@@ -8,7 +8,7 @@ namespace OpenWeatherMapClient.Models
     /// <summary>
     /// Hourly forecast weather data API response
     /// </summary>
-    public class HourlyForecastWeatherData : BaseWeatherForecastData
+    public class HourForecastWeatherData : BaseWeatherForecastData
     {
         /// <summary>
         /// Temperature

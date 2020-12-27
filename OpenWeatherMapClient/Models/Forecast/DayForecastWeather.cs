@@ -8,9 +8,9 @@ using System.Text.Json.Serialization;
 namespace OpenWeatherMapClient.Models
 {
     /// <summary>
-    ///  Current weather data API response
+    /// Daily forecast weather data API response
     /// </summary>
-    public class CurrentWeatherForecastData : BaseWeatherForecastData
+    public class DailyForecastWeather : BaseWeatherForecastData
     { 
         /// <summary>
         ///  Sunrise time, UTC
@@ -19,45 +19,45 @@ namespace OpenWeatherMapClient.Models
         public DateTime Sunrise { get; set; }
 
         /// <summary>
-        ///  Sunset time, UTC
+        /// Sunset time, UTC
         /// </summary>
         [JsonPropertyName("sunset")]
         public DateTime Sunset { get; set; }
 
         /// <summary>
-        /// Temperature.  
+        /// Daily temperatures
         /// </summary>
         [JsonPropertyName("temp")] 
-        public Temperature Temp { get; set; } 
+        public DailyTemperature Temp { get; set; }
 
         /// <summary>
-        /// Temperature. This accounts for the human perception of weather. 
+        /// This accounts for the human perception of weather.
         /// </summary>
-        [JsonPropertyName("feels_like")] 
-        public Temperature FeelsLike { get; set; }
+        [JsonPropertyName("feels_like")]
+        public FeelsLike FeelsLike { get; set; } 
 
         /// <summary>
-        /// Current UV index
+        /// Probability of precipitation
+        /// </summary>
+        [JsonPropertyName("pop")]
+        public double Pop { get; set; }
+
+        /// <summary>
+        /// The maximum value of UV index for the day
         /// </summary>
         [JsonPropertyName("uvi")]
-        public int Uvi { get; set; }
-         
-        /// <summary>
-        /// Average visibility, metres
-        /// </summary>
-        [JsonPropertyName("visibility")]
-        public int Visibility { get; set; }
-                    
-        /// <summary>
-        /// Rain
-        /// </summary>
-        [JsonPropertyName("rain")]
-        public Rain Rain { get; set; }
+        public double Uvi { get; set; }
 
         /// <summary>
-        /// Snow
+        /// Precipitation volume, mm
+        /// </summary>
+        [JsonPropertyName("rain ")]
+        public double? Rain { get; set; }
+
+        /// <summary>
+        /// Snow volume, mm
         /// </summary>
         [JsonPropertyName("snow")]
-        public Snow Snow { get; set; } 
+        public double? Snow { get; set; }
     }
 }

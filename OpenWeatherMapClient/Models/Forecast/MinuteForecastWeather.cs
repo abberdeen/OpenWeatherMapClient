@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class MinutelyForecastWeatherData
+    public class MinuteForecastWeather
     {
         /// <summary>
         /// Time of the forecasted data, UTC
