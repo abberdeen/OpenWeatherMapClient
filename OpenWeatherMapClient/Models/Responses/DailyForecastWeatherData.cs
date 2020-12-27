@@ -13,13 +13,13 @@ namespace OpenWeatherMapClient.Models
     public class DailyForecastWeatherData : BaseWeatherForecastData
     { 
         /// <summary>
-        ///  Sunrise time, Unix, UTC
+        ///  Sunrise time, UTC
         /// </summary>
         [JsonPropertyName("sunrise")]
         public DateTime Sunrise { get; set; }
 
         /// <summary>
-        /// Sunset time, Unix, UTC
+        /// Sunset time, UTC
         /// </summary>
         [JsonPropertyName("sunset")]
         public DateTime Sunset { get; set; }

@@ -18,8 +18,7 @@ namespace OpenWeatherMapClient.Models.Extension
                 var val = reader.GetDouble();
                 return Temperature.FromKelvin(reader.GetDouble());
             }
-            return null;
-           
+            return null;           
         }
 
         public override void Write(

@@ -10,7 +10,7 @@ namespace OpenWeatherMapClient.Models
     /// <summary>
     ///  Current weather data API response
     /// </summary>
-    public class CurrentWeatherData : BaseWeatherForecastData
+    public class CurrentWeatherForecastData : BaseWeatherForecastData
     { 
         /// <summary>
         ///  Sunrise time, UTC

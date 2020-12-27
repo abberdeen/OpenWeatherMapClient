@@ -7,16 +7,21 @@ namespace OpenWeatherMapClient.Models
     public class OneCallData
     {
         /// <summary>
-        /// Geographical coordinates of the location (latitude)
-        /// </summary>
-        [JsonPropertyName("lat")]
-        public double Latitude { get; set; }
+        /// Geographical coordinates of the location (latitude, longitude)
+        /// </summary> 
+        public Coordinates Coordinates { get; set; }
 
-        /// <summary>
-        /// Geographical coordinates of the location (longitude)
-        /// </summary>
-        [JsonPropertyName("lon")]
-        public double Longitude { get; set; }
+        ///// <summary>
+        ///// Geographical coordinates of the location (latitude)
+        ///// </summary>
+        //[JsonPropertyName("lat")]
+        //public double Latitude { get; set; }
+
+        ///// <summary>
+        ///// Geographical coordinates of the location (longitude)
+        ///// </summary>
+        //[JsonPropertyName("lon")]
+        //public double Longitude { get; set; }
 
         /// <summary>
         /// Timezone name for the requested location
@@ -34,7 +39,7 @@ namespace OpenWeatherMapClient.Models
         /// Current weather data API response
         /// </summary>
         [JsonPropertyName("current")]
-        public CurrentWeatherData Current { get; set; }
+        public CurrentWeatherForecastData Current { get; set; }
 
         /// <summary>
         /// Minute forecast weather data API response

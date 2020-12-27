@@ -1,5 +1,6 @@
 ﻿using OpenWeatherMapClient.Models.Base;
 using OpenWeatherMapClient.Models.Extension;
+using OpenWeatherMapClient.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,9 @@ using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models.Responses
 {
+    /// <summary>
+    
+    /// </summary>
     public class BaseWeatherForecastData
     {
 
@@ -32,7 +36,7 @@ namespace OpenWeatherMapClient.Models.Responses
         /// Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form.
         /// </summary>
         [JsonPropertyName("dew_point")]
-        public double DewPoint { get; set; }
+        public Temperature DewPoint { get; set; }
 
         /// <summary>
         /// Cloudiness, %
@@ -44,13 +48,13 @@ namespace OpenWeatherMapClient.Models.Responses
         /// Wind speed.
         /// </summary>
         [JsonPropertyName("wind_speed")]
-        public double WindSpeed { get; set; }
+        public Speed WindSpeed { get; set; }
 
         /// <summary>
         /// (where available) Wind gust. Wind speed.
         /// </summary>
         [JsonPropertyName("wind_gust")]
-        public double? WindGust { get; set; }
+        public Speed? WindGust { get; set; }
 
         /// <summary>
         /// Wind direction, degrees (meteorological)

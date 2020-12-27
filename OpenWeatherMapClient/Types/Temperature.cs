@@ -28,7 +28,7 @@ namespace OpenWeatherMapClient
 
         public double Celsius
         {
-            get { return _kelvin - ABSOLUTE_ZERO; } /* convert Kelvin to Celsius */
+            get { return _kelvin - ABSOLUTE_ZERO; } /* convert Kelvin to Celsius C:\Users\abba\source\repos\OpenWeatherMapClient\OpenWeatherMapClient\Models\Responses\AlertData.cs*/
             set { _kelvin = value + ABSOLUTE_ZERO; } /* convert Celsius to Kelvin */
         }
          

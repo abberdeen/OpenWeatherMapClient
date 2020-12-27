@@ -7,17 +7,17 @@
     public enum UnitOfMeasurement
     {
         /// <summary>
-        /// Default. Temperature in Kelvin and wind speed in meter/sec is
+        /// Loads data from API as:  Default. Temperature in Kelvin and wind speed in meter/sec is
         /// </summary>
         Standard = 1,
 
         /// <summary>
-        /// Temperature in Celsius and wind speed in meter/sec
+        /// Loads data from API as: Temperature in Celsius and wind speed in meter/sec
         /// </summary>
         Metric = 2,
 
         /// <summary>
-        /// Temperature in Fahrenheit and wind speed in miles/hour
+        /// Loads data from API as:  Temperature in Fahrenheit and wind speed in miles/hour
         /// </summary>
         Imperial = 3,
     }
