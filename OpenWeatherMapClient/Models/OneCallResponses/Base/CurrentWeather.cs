@@ -1,45 +1,53 @@
 ﻿using OpenWeatherMapClient.Models.Base;
 using OpenWeatherMapClient.Models.Extension;
 using OpenWeatherMapClient.Models.Responses;
+using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
     /// <summary>
-    /// Hourly forecast weather data API response
+    ///  Current weather data API response
     /// </summary>
-    public class HourForecastWeatherData : BaseWeatherForecastData
-    {
+    public class CurrentWeather : BaseWeatherForecastData
+    { 
         /// <summary>
-        /// Temperature
+        ///  Sunrise time, UTC
         /// </summary>
-        [JsonPropertyName("temp")] 
-        public Temperature Temp { get; set; }
+        [JsonPropertyName("sunrise")]
+        public DateTime Sunrise { get; set; }
 
         /// <summary>
-        /// Temperature. This accounts for the human perception of weather.
+        ///  Sunset time, UTC
+        /// </summary>
+        [JsonPropertyName("sunset")]
+        public DateTime Sunset { get; set; }
+
+        /// <summary>
+        /// Temperature.  
+        /// </summary>
+        [JsonPropertyName("temp")] 
+        public Temperature Temp { get; set; } 
+
+        /// <summary>
+        /// Temperature. This accounts for the human perception of weather. 
         /// </summary>
         [JsonPropertyName("feels_like")] 
         public Temperature FeelsLike { get; set; }
 
         /// <summary>
-        /// UV index
+        /// Current UV index
         /// </summary>
         [JsonPropertyName("uvi")]
         public double Uvi { get; set; }
-
+         
         /// <summary>
         /// Average visibility, metres
         /// </summary>
         [JsonPropertyName("visibility")]
-        public int Visibility { get; set; }
-
-        /// <summary>
-        /// Probability of precipitation
-        /// </summary>
-        [JsonPropertyName("pop")]
-        public double Pop { get; set; }
-
+        public double Visibility { get; set; }
+                    
         /// <summary>
         /// Rain
         /// </summary>
@@ -50,6 +58,6 @@ namespace OpenWeatherMapClient.Models
         /// Snow
         /// </summary>
         [JsonPropertyName("snow")]
-        public Snow Snow { get; set; }
+        public Snow Snow { get; set; } 
     }
 }

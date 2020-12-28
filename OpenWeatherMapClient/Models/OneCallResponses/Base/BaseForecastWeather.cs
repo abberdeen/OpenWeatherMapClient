@@ -24,13 +24,13 @@ namespace OpenWeatherMapClient.Models.Responses
         /// Atmospheric pressure on the sea level, hPa 
         /// </summary>
         [JsonPropertyName("pressure")]
-        public int Pressure { get; set; }
+        public double Pressure { get; set; }
 
         /// <summary>
         /// Humidity, %
         /// </summary>
         [JsonPropertyName("humidity")]
-        public int Humidity { get; set; }
+        public double Humidity { get; set; }
 
         /// <summary>
         /// Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form.
@@ -42,7 +42,7 @@ namespace OpenWeatherMapClient.Models.Responses
         /// Cloudiness, %
         /// </summary>
         [JsonPropertyName("clouds")]
-        public int Clouds { get; set; }
+        public double Clouds { get; set; }
 
         /// <summary>
         /// Wind speed.
@@ -60,7 +60,7 @@ namespace OpenWeatherMapClient.Models.Responses
         /// Wind direction, degrees (meteorological)
         /// </summary>
         [JsonPropertyName("wind_deg")]
-        public int WindDeg { get; set; }
+        public double WindDeg { get; set; }
 
         /// <summary>
         ///

@@ -9,9 +9,16 @@ namespace OpenWeatherMapClient.Models.OneCallResponses
     public class BaseResponse
     {
         /// <summary>
-        /// Geographical coordinates of the location (latitude, longitude)
-        /// </summary> 
-        public Coordinates Coordinates { get; set; }
+        /// Geographical coordinates of the location (latitude)
+        /// </summary>
+        [JsonPropertyName("lat")]
+        public double Latitude { get; set; }
+
+        /// <summary>
+        /// Geographical coordinates of the location (longitude)
+        /// </summary>
+        [JsonPropertyName("lon")]
+        public double Longitude { get; set; }
 
         /// <summary>
         /// Timezone name for the requested location

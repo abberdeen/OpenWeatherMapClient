@@ -11,30 +11,30 @@ namespace OpenWeatherMapClient.Models
         /// Current weather data API response
         /// </summary>
         [JsonPropertyName("current")]
-        public CurrentWeather Current { get; set; }
+        public CurrentWeather CurrentWeather { get; set; }
 
         /// <summary>
         /// Minute forecast weather data API response
         /// </summary>
         [JsonPropertyName("minutely")]
-        public List<MinuteForecastWeather> Minutely { get; set; }
+        public List<MinuteForecastWeather> MinuteWeatherForecasts { get; set; }
 
         /// <summary>
         /// Hourly forecast weather data API response
         /// </summary>
         [JsonPropertyName("hourly")]
-        public List<HourForecastWeatherData> Hourly { get; set; }
+        public List<HourForecastWeatherData> HourlyWeatherForecasts { get; set; }
 
         /// <summary>
         /// Daily forecast weather data API response
         /// </summary>
         [JsonPropertyName("daily")]
-        public List<DailyForecastWeather> Daily { get; set; }
+        public List<DailyForecastWeather> DailyWeatherForecasts { get; set; }
 
         /// <summary>
         /// National weather alerts data from major national weather warning systems
         /// </summary>
         [JsonPropertyName("alerts")]
-        public List<Alert> Alerts { get; set; }
+        public List<AlertResponse> Alerts { get; set; }
     }
 }

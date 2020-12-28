@@ -5,14 +5,14 @@ using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models
 {
-    public class CurrentWeatherResponse : BaseResponse
-    { 
+    public class DailyWeatherForecastsResponse : BaseResponse
+    {
 
         /// <summary>
-        /// Current weather data API response
+        /// Daily forecast weather data API response
         /// </summary>
-        [JsonPropertyName("current")]
-        public CurrentWeather Current { get; set; }
-        
+        [JsonPropertyName("daily")]
+        public List<DailyForecastWeather> DailyWeatherForecasts { get; set; }
+
     }
 }

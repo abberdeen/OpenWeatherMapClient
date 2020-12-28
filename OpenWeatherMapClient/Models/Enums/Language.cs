@@ -10,7 +10,7 @@ namespace OpenWeatherMapClient.Models.Enums
     /// </summary>
     public class Language
     {
-        private string LanguageCode { get; set; }
+        public string LanguageCode { get; set; }
 
         public Language()
         {

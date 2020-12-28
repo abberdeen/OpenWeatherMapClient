@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -45,6 +46,19 @@ namespace OpenWeatherMapClient
             _unitOfMeasurement = unitOfMeasurement;
         }
 
+        private string GetRequestUri(Coordinates coordinates, List<Exclude> excludes = null)
+        {
+            var excludeParts = String.Join(", ", excludes.ToArray()).ToLower();
+            var units = _unitOfMeasurement.ToString().ToLower();
+            var uri = $"https://api.openweathermap.org/data/2.5/onecall?" +
+                $"lat={coordinates.Latitude}&" +
+                $"lon={coordinates.Longitude}&" +
+                $"exclude={excludeParts}&" +
+                $"appid={_apiKey}&" +
+                $"units={units}&" +
+                $"lang={_language.LanguageCode}";
+            return uri;
+        }
         /// <summary>
         /// Use this method to get access to all one call api data (without history): 
         /// current weather, minute forecast for 1 hour, hourly forecast for 48 hours,
@@ -58,9 +72,21 @@ namespace OpenWeatherMapClient
         /// <returns></returns>
         public OneCallResponse GetCurrentAndForecastWeatherData(Coordinates coordinates, List<Exclude> excludes = null)
         {
-            var weatherForecast = OneCallDataDeserializer("");
+            var oneCallUri = GetRequestUri(coordinates, excludes);
+            using (var client = new System.Net.WebClient())
+            {
+                try
+                {
+                    var jsonResponse = client.DownloadString(oneCallUri);
+                    var weatherForecast = OneCallDataDeserializer(jsonResponse);
+                    return weatherForecast;
+                }
+                catch (System.Net.WebException)
+                {
 
-            return weatherForecast;
+                    throw new OpenWeatherMapAPIException();
+                } 
+            }
         }
 
         /// <summary>
@@ -73,10 +99,11 @@ namespace OpenWeatherMapClient
             var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Minutely, Exclude.Hourly, Exclude.Daily });
             var response = new CurrentWeatherResponse
             {
-                Coordinates = oneCallResponse.Coordinates,
+                Latitude = oneCallResponse.Latitude,
+                Longitude = oneCallResponse.Longitude,
                 Timezone = oneCallResponse.Timezone,
                 TimezoneOffset = oneCallResponse.TimezoneOffset,
-                Current = oneCallResponse.Current
+                CurrentWeather = oneCallResponse.CurrentWeather
             };
             return response;
         }
@@ -86,15 +113,16 @@ namespace OpenWeatherMapClient
         /// </summary>
         /// <param name="coordinates"></param>
         /// <returns></returns>
-        public MinuteForecastWeatherResponse GetMinuteForecastWeather(Coordinates coordinates)
+        public MinuteWeatherForecastsResponse GetMinuteForecastWeather(Coordinates coordinates)
         {
             var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Hourly, Exclude.Daily });
-            var response = new MinuteForecastWeatherResponse
+            var response = new MinuteWeatherForecastsResponse
             {
-                Coordinates = oneCallResponse.Coordinates,
+                Latitude = oneCallResponse.Latitude,
+                Longitude = oneCallResponse.Longitude,
                 Timezone = oneCallResponse.Timezone,
                 TimezoneOffset = oneCallResponse.TimezoneOffset,
-                Minutely = oneCallResponse.Minutely
+                MinuteWeatherForecasts = oneCallResponse.MinuteWeatherForecasts
             };
             return response;
         }
@@ -104,15 +132,16 @@ namespace OpenWeatherMapClient
         /// </summary>
         /// <param name="coordinates"></param>
         /// <returns></returns>
-        public HourlyForecastWeatherResponse GetHourlyForecastWeather(Coordinates coordinates)
+        public HourlyWeatherForecastsResponse GetHourlyForecastWeather(Coordinates coordinates)
         {
             var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Daily });
-            var response = new HourlyForecastWeatherResponse
+            var response = new HourlyWeatherForecastsResponse
             {
-                Coordinates = oneCallResponse.Coordinates,
+                Latitude = oneCallResponse.Latitude,
+                Longitude = oneCallResponse.Longitude,
                 Timezone = oneCallResponse.Timezone,
                 TimezoneOffset = oneCallResponse.TimezoneOffset,
-                Hourly = oneCallResponse.Hourly
+                HourlyWeatherForecasts = oneCallResponse.HourlyWeatherForecasts
             };
             return response;
         }
@@ -122,15 +151,16 @@ namespace OpenWeatherMapClient
         /// </summary>
         /// <param name="coordinates"></param>
         /// <returns></returns>
-        public HourlyForecastWeatherResponse GetDailyForecastWeather(Coordinates coordinates)
+        public DailyWeatherForecastsResponse GetDailyForecastWeather(Coordinates coordinates)
         {
             var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Hourly });
-            var response = new HourlyForecastWeatherResponse
+            var response = new DailyWeatherForecastsResponse
             {
-                Coordinates = oneCallResponse.Coordinates,
+                Latitude = oneCallResponse.Latitude,
+                Longitude = oneCallResponse.Longitude,
                 Timezone = oneCallResponse.Timezone,
                 TimezoneOffset = oneCallResponse.TimezoneOffset,
-                Hourly = oneCallResponse.Hourly
+                DailyWeatherForecasts = oneCallResponse.DailyWeatherForecasts
             };
             return response;
         }
