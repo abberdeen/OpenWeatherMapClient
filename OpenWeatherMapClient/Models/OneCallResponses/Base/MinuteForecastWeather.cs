@@ -16,6 +16,6 @@ namespace OpenWeatherMapClient.Models
         /// Precipitation volume, mm
         /// </summary>
         [JsonPropertyName("precipitation")]
-        public int Precipitation { get; set; }
+        public double Precipitation { get; set; }
     }
 }

@@ -9,13 +9,13 @@ namespace OpenWeatherMapClient.Models.Base
         /// Min daily temperature.
         /// </summary>
         [JsonPropertyName("min")] 
-        public double Min { get; set; }
+        public Temperature Min { get; set; }
 
         /// <summary>
         /// Max daily temperature.
         /// </summary>
         [JsonPropertyName("max")] 
-        public double Max { get; set; }
+        public Temperature Max { get; set; }
 
         /// <summary>
         /// Morning temperature.

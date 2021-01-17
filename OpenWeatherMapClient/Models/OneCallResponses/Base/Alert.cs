@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace OpenWeatherMapClient.Models.Base
 {
@@ -20,16 +21,16 @@ namespace OpenWeatherMapClient.Models.Base
         public string Event { get; set; }
 
         /// <summary>
-        /// Date and time of the start of the alert, Unix, UTC
+        /// Date and time of the start of the alert, UTC
         /// </summary>
         [JsonPropertyName("start")]
-        public int Start { get; set; }
+        public DateTime Start { get; set; }
 
         /// <summary>
-        /// Date and time of the end of the alert, Unix, UTC
+        /// Date and time of the end of the alert, UTC
         /// </summary>
         [JsonPropertyName("end")]
-        public int End { get; set; }
+        public DateTime End { get; set; }
 
         /// <summary>
         /// Description of the alert

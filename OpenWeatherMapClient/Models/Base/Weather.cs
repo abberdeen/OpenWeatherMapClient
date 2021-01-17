@@ -38,6 +38,7 @@ namespace OpenWeatherMapClient.Models.Base
 
     /// <summary>
     /// Group of weather parameters 
+    /// Enum int values doesnt represend anything
     /// </summary>
     public enum WeatherConditionMain
     {
@@ -46,6 +47,15 @@ namespace OpenWeatherMapClient.Models.Base
         Rain = 3,
         Snow = 4,
         Atmosphere = 5,
+        Mist = 51,
+        Smoke = 52,
+        Haze = 53,
+        Dust = 54,
+        Fog = 55,
+        Sand = 56, 
+        Ash = 57,
+        Squall = 58,
+        Tornado = 59,
         Clear = 6,
         Clouds = 7
     }

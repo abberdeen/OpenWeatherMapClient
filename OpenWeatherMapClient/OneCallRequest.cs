@@ -36,19 +36,16 @@ namespace OpenWeatherMapClient
         /// </summary>
         /// <param name="apiKey"></param>
         /// <param name="language"></param>
-        /// <param name="unitOfMeasurement"></param>
-        public OneCallRequest(string apiKey,
-            Language language,
-            UnitOfMeasurement unitOfMeasurement)
+        public OneCallRequest(string apiKey, Language language)
         {
             _apiKey = apiKey;
             _language = language;
-            _unitOfMeasurement = unitOfMeasurement;
+            _unitOfMeasurement = UnitOfMeasurement.Standard;
         }
 
         private string GetRequestUri(Coordinates coordinates, List<Exclude> excludes = null)
         {
-            var excludeParts = String.Join(", ", excludes.ToArray()).ToLower();
+            var excludeParts = excludes == null ? "" : String.Join(", ", excludes.ToArray()).ToLower();
             var units = _unitOfMeasurement.ToString().ToLower();
             var uri = $"https://api.openweathermap.org/data/2.5/onecall?" +
                 $"lat={coordinates.Latitude}&" +
@@ -70,7 +67,14 @@ namespace OpenWeatherMapClient
         /// </summary>
         /// <param name="coordinates"></param>
         /// <returns></returns>
-        public OneCallResponse GetCurrentAndForecastWeatherData(Coordinates coordinates, List<Exclude> excludes = null)
+        public OneCallResponse GetCurrentAndForecastWeather(Coordinates coordinates, List<Exclude> excludes = null)
+        {
+            var rawJson = GetCurrentAndForecastWeatherRawJson(coordinates, excludes);
+            var weatherForecast = OneCallDataDeserializer(rawJson);
+            return weatherForecast;
+        }
+
+        public string GetCurrentAndForecastWeatherRawJson(Coordinates coordinates, List<Exclude> excludes = null)
         {
             var oneCallUri = GetRequestUri(coordinates, excludes);
             using (var client = new System.Net.WebClient())
@@ -78,14 +82,13 @@ namespace OpenWeatherMapClient
                 try
                 {
                     var jsonResponse = client.DownloadString(oneCallUri);
-                    var weatherForecast = OneCallDataDeserializer(jsonResponse);
-                    return weatherForecast;
+                    return jsonResponse;
                 }
                 catch (System.Net.WebException)
                 {
 
                     throw new OpenWeatherMapAPIException();
-                } 
+                }
             }
         }
 
@@ -96,7 +99,7 @@ namespace OpenWeatherMapClient
         /// <returns></returns>
         public CurrentWeatherResponse GetCurrentWeather(Coordinates coordinates)
         {
-            var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Minutely, Exclude.Hourly, Exclude.Daily });
+            var oneCallResponse = GetCurrentAndForecastWeather(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Minutely, Exclude.Hourly, Exclude.Daily });
             var response = new CurrentWeatherResponse
             {
                 Latitude = oneCallResponse.Latitude,
@@ -115,7 +118,7 @@ namespace OpenWeatherMapClient
         /// <returns></returns>
         public MinuteWeatherForecastsResponse GetMinuteForecastWeather(Coordinates coordinates)
         {
-            var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Hourly, Exclude.Daily });
+            var oneCallResponse = GetCurrentAndForecastWeather(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Hourly, Exclude.Daily });
             var response = new MinuteWeatherForecastsResponse
             {
                 Latitude = oneCallResponse.Latitude,
@@ -134,7 +137,7 @@ namespace OpenWeatherMapClient
         /// <returns></returns>
         public HourlyWeatherForecastsResponse GetHourlyForecastWeather(Coordinates coordinates)
         {
-            var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Daily });
+            var oneCallResponse = GetCurrentAndForecastWeather(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Daily });
             var response = new HourlyWeatherForecastsResponse
             {
                 Latitude = oneCallResponse.Latitude,
@@ -153,7 +156,7 @@ namespace OpenWeatherMapClient
         /// <returns></returns>
         public DailyWeatherForecastsResponse GetDailyForecastWeather(Coordinates coordinates)
         {
-            var oneCallResponse = GetCurrentAndForecastWeatherData(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Hourly });
+            var oneCallResponse = GetCurrentAndForecastWeather(coordinates, new List<Exclude>() { Exclude.Alerts, Exclude.Current, Exclude.Minutely, Exclude.Hourly });
             var response = new DailyWeatherForecastsResponse
             {
                 Latitude = oneCallResponse.Latitude,
@@ -165,7 +168,7 @@ namespace OpenWeatherMapClient
             return response;
         }
 
-        private OneCallResponse OneCallDataDeserializer(string jsonResult)
+        public OneCallResponse OneCallDataDeserializer(string jsonResult)
         {
             var deserializeOptions = PrepareJsonSerializerOptions();
             var oneCallData = JsonSerializer.Deserialize<OneCallResponse>(jsonResult, deserializeOptions);
@@ -176,6 +179,7 @@ namespace OpenWeatherMapClient
         {
             var deserializeOptions = new JsonSerializerOptions();
             deserializeOptions.Converters.Add(new TemperatureConverter());
+            deserializeOptions.Converters.Add(new SpeedConverter());
             deserializeOptions.Converters.Add(new UnixDateTimeConverter());
             deserializeOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
             return deserializeOptions;
